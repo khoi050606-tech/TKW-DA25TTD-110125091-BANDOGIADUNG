@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán Tivi Samsung - DiMart</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Viền sọc màu phong cách giao hàng Shopee */
+        .shopee-border-top {
+            height: 4px;
+            width: 100%;
+            background-image: repeating-linear-gradient(45deg, #0d6efd, #0d6efd 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+        }
+        .checkout-section {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0d6efd; /* Tông màu xanh dương đồng bộ với nút Mua Ngay */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Hộp tùy chọn phương thức */
+        .selection-box {
+            border: 1px solid #dee2e6;
+            padding: 14px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .selection-box:hover {
+            border-color: #0d6efd;
+            background-color: #f0f6ff;
+        }
+        .selection-box.active {
+            border-color: #0d6efd;
+            color: #0d6efd;
+            background-color: #f0f6ff;
+        }
+        .selection-box.active::after {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: #0d6efd;
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 6px;
+        }
+        .product-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            background: #fff;
+        }
+        .gift-tag {
+            font-size: 0.75rem;
+            background-color: #fff5f5;
+            color: #dc3545;
+            border: 1px solid #ffc9c9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .btn-order {
+            background: #0d6efd;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-order:hover {
+            background: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER TRANG THANH TOÁN -->
+    <header class="bg-white border-bottom py-3 mb-4 shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="text-decoration-none">
+                    <h3 class="fw-bold m-0 d-flex align-items-center gap-1" style="color: #0d6efd;">
+                        <i class="bi bi-shop-window"></i> DiMart
+                    </h3>
+                </a>
+                <div class="vr d-none d-sm-block" style="height: 30px;"></div>
+                <span class="fs-4 text-dark d-none d-sm-inline fw-semibold">Thanh Toán Đơn Hàng</span>
+            </div>
+            <a href="chitietdienmay.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Quay lại sản phẩm
+            </a>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            <!-- CỘT TRÁI: THÔNG TIN CHI TIẾT ĐƠN HÀNG -->
+            <div class="col-12 col-lg-8">
+                
+                <!-- 1. ĐỊA CHỈ NHẬN HÀNG -->
+                <div class="checkout-section p-0 overflow-hidden">
+                    <div class="shopee-border-top"></div>
+                    <div class="p-4">
+                        <div class="section-title mb-3">
+                            <i class="bi bi-geo-alt-fill"></i> Địa Chỉ Nhận Hàng
+                        </div>
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">Nguyễn Văn A (+84) 339 022 75</span>
+                                <p class="text-secondary mb-0 mt-1 small">
+                                    Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long
+                                </p>
+                                <span class="badge border border-primary text-primary mt-2 small">Mặc định</span>
+                            </div>
+                            <button class="btn btn-link text-decoration-none text-primary p-0 small" data-bs-toggle="modal" data-bs-target="#addressModal">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DANH SÁCH SẢN PHẨM & QUÀ TẶNG KÈM -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3 text-dark">
+                        <i class="bi bi-bag-check-fill text-primary"></i> Sản Phẩm Đặt Mua
+                    </div>
+                    
+                    <div class="table-responsive d-none d-md-block">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr class="text-secondary small">
+                                    <th>Sản phẩm</th>
+                                    <th class="text-center">Đơn giá</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-end">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sản phẩm chính -->
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="tivi.png" class="product-img" alt="Tivi Samsung">
+                                            <div>
+                                                <h6 class="mb-1 fw-bold text-dark">Smart Tivi Crystal UHD 4K 55 inch Samsung UA55BU8000</h6>
+                                                <span class="text-muted small">Mã sản phẩm: SUNHOUSE SHD4030</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center fw-semibold text-dark">10.990.000đ</td>
+                                    <td class="text-center text-secondary">1</td>
+                                    <td class="text-end fw-bold text-danger">10.990.000đ</td>
+                                </tr>
+                                <!-- Quà tặng 1 kèm theo miễn phí -->
+                                <tr class="table-light">
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3 ps-4">
+                                            <div class="text-success fs-4"><i class="bi bi-gift-fill"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark small">Miễn phí công lắp đặt và vật tư phụ giá treo tivi</div>
+                                                <span class="gift-tag">Quà tặng ưu đãi</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center text-decoration-line-through text-muted small">500.000đ</td>
+                                    <td class="text-center text-muted small">1</td>
+                                    <td class="text-end text-success fw-semibold">0đ</td>
+                                </tr>
+                                <!-- Quà tặng 2 kèm theo miễn phí -->
+                                <tr class="table-light">
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3 ps-4">
+                                            <div class="text-success fs-4"><i class="bi bi-gift-fill"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark small">Tặng gói tài khoản xem phim ứng dụng giải trí 12 tháng</div>
+                                                <span class="gift-tag">Quà tặng ưu đãi</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center text-decoration-line-through text-muted small">1.000.000đ</td>
+                                    <td class="text-center text-muted small">1</td>
+                                    <td class="text-end text-success fw-semibold">0đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Giao diện Mobile thu gọn -->
+                    <div class="d-block d-md-none">
+                        <div class="border rounded p-3 mb-2">
+                            <div class="d-flex gap-3 align-items-start">
+                                <img src="tivi.png" class="product-img" alt="Tivi Samsung">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-dark small">Smart Tivi Crystal UHD 4K 55 inch Samsung UA55BU8000</h6>
+                                    <div class="text-muted small mb-1">Số lượng: 1</div>
+                                    <div class="fw-bold text-danger">10.990.000đ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-light p-2 rounded mb-1 small text-dark d-flex align-items-center gap-2">
+                            <i class="bi bi-gift text-danger"></i> Quà tặng kèm: Miễn phí công lắp đặt & giá treo (0đ)
+                        </div>
+                        <div class="bg-light p-2 rounded mb-3 small text-dark d-flex align-items-center gap-2">
+                            <i class="bi bi-gift text-danger"></i> Quà tặng kèm: Gói tài khoản xem phim 12 tháng (0đ)
+                        </div>
+                    </div>
+
+                    <!-- Ghi chú đặt hàng -->
+                    <div class="row align-items-center mt-3 g-2 bg-light p-3 rounded mx-0">
+                        <div class="col-12 col-sm-3">
+                            <label for="buyerNote" class="form-label mb-0 fw-semibold text-secondary small">Lưu ý cho kỹ thuật viên lắp đặt:</label>
+                        </div>
+                        <div class="col-12 col-sm-9">
+                            <input type="text" id="buyerNote" class="form-control form-control-sm" placeholder="Ví dụ: Giao ngoài giờ hành chính, cần mang theo khoan tường...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. PHƯƠNG THỨC GIAO HÀNG & LẮP ĐẶT -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-truck"></i> Cách Nhận Hàng & Vận Chuyển
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box active" onclick="selectShipping(this, 100000)">
+                                <div class="fw-bold text-dark">Giao nhanh tiêu chuẩn + Lắp đặt</div>
+                                <div class="text-muted small mt-1">Giao lắp tận nhà chuyên nghiệp trong 1-2 ngày</div>
+                                <div class="fw-bold text-dark mt-2">Phí dịch vụ: 100.000đ</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box" onclick="selectShipping(this, 250000)">
+                                <div class="fw-bold text-dark">Giao hỏa tốc nhận trong ngày (2H)</div>
+                                <div class="text-muted small mt-1">Đặt trước 16h00 nhận ngay trong ngày, bàn giao kỹ thuật lắp nhanh</div>
+                                <div class="fw-bold text-dark mt-2">Phí dịch vụ: 250.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PHƯƠNG THỨC THANH TOÁN -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-credit-card-2-back-fill"></i> Phương Thức Thanh Toán
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this, false)">
+                                <div class="fw-bold text-dark"><i class="bi bi-cash-coin text-success"></i> COD (Nhận hàng trả tiền)</div>
+                                <div class="text-muted small mt-1">Thanh toán tiền mặt cho nhân viên bàn giao</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <!-- Mặc định chọn chuyển khoản để được giảm giá 2% theo banner ưu đãi -->
+                            <div class="selection-box active" onclick="selectPayment(this, true)">
+                                <div class="fw-bold text-dark"><i class="bi bi-qr-code-scan text-primary"></i> Quét mã QR-Code</div>
+                                <div class="text-danger small mt-1 fw-bold"><i class="bi bi-percent"></i> Giảm thêm 2% đơn hàng</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this, false)">
+                                <div class="fw-bold text-dark"><i class="bi bi-wallet2 text-danger"></i> Trả góp 0% lãi suất</div>
+                                <div class="text-muted small mt-1">Liên kết tài chính thanh toán hàng tháng</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CỘT PHẢI: MÃ GIẢM GIÁ & TỔNG TIỀN -->
+            <div class="col-12 col-lg-4">
+                
+                <!-- MÃ GIẢM GIÁ (VOUCHER) -->
+                <div class="checkout-section">
+                    <div class="fw-bold text-dark mb-2"><i class="bi bi-ticket-perforated-fill text-danger"></i> DiMart Voucher</div>
+                    <div class="input-group">
+                        <input type="text" id="couponInput" class="form-control" placeholder="Nhập mã giảm giá (VD: SAMSUNG300)">
+                        <button class="btn btn-dark" type="button" onclick="applyCoupon()">Áp dụng</button>
+                    </div>
+                    <div id="couponMessage" class="small mt-2"></div>
+                </div>
+
+                <!-- CHI TIẾT THANH TOÁN -->
+                <div class="checkout-section">
+                    <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom">Chi tiết thanh toán</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Tổng tiền hàng:</span>
+                        <span class="text-dark fw-semibold">10.990.000đ</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Phí giao hàng & lắp đặt:</span>
+                        <span id="shippingFeeText" class="text-dark fw-semibold">100.000đ</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Giảm giá Voucher:</span>
+                        <span id="discountText" class="text-success fw-bold">-0đ</span>
+                    </div>
+
+                    <!-- Mục chiết khấu 2% khi quét mã QR ngân hàng -->
+                    <div class="d-flex justify-content-between mb-3 small text-secondary">
+                        <span>Chiết khấu QR-Code (Giảm 2%):</span>
+                        <span id="qrDiscountText" class="text-success fw-bold">-219.800đ</span>
+                    </div>
+                    
+                    <hr class="my-3">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="fw-bold text-dark fs-5">Tổng thanh toán:</span>
+                        <!-- Mặc định: 10.990.000 + 100.000 - 219.800 (chiết khấu 2%) = 10.870.200đ -->
+                        <span id="totalFinalText" class="fw-bold text-danger fs-3">10.870.200đ</span>
+                    </div>
+
+                    <!-- Nút xác nhận đặt hàng -->
+                    <button class="btn btn-order shadow" onclick="placeOrder()">
+                        <i class="bi bi-check-circle-fill"></i> ĐẶT HÀNG NGAY
+                    </button>
+                    
+                    <p class="text-center text-muted mt-3 mb-0" style="font-size: 11px;">
+                        Bằng việc bấm đặt hàng, quý khách đồng ý tuân thủ toàn bộ quy trình lắp đặt và bàn giao thiết bị điện máy của DiMart.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL THAY ĐỔI ĐỊA CHỈ NHẬN HÀNG -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Cập nhật thông tin nhận hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addressForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Họ và tên người nhận</label>
+                            <input type="text" class="form-control" value="Nguyễn Văn A" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Số điện thoại liên lạc</label>
+                            <input type="tel" class="form-control" value="033902275" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Địa chỉ nhận hàng chi tiết</label>
+                            <textarea class="form-control" rows="2" required>Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Xác nhận cập nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- KỊCH BẢN TÍNH TOÁN TIỀN ĐỘNG -->
+    <script>
+        let baseProductPrice = 10990000; // Giá tivi 10.990.000đ
+        let shippingFee = 100000;        // Phí giao mặc định 100.000đ
+        let voucherDiscount = 0;         // Chiết khấu từ voucher
+        let isQRSelected = true;         // Mặc định ban đầu chọn quét mã QR (để được giảm 2%)
+
+        function selectShipping(element, fee) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            
+            shippingFee = fee;
+            document.getElementById('shippingFeeText').innerText = fee.toLocaleString('vi-VN') + 'đ';
+            updateTotal();
+        }
+
+        function selectPayment(element, qrApplied) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            
+            isQRSelected = qrApplied;
+            updateTotal();
+        }
+
+        function applyCoupon() {
+            let couponInput = document.getElementById('couponInput').value.trim().toUpperCase();
+            let msg = document.getElementById('couponMessage');
+            
+            if (couponInput === "SAMSUNG300") {
+                voucherDiscount = 300000; // Giảm thêm 300.000đ
+                msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> Áp dụng thành công! Giảm ngay 300.000đ</span>';
+                document.getElementById('discountText').innerText = "-" + voucherDiscount.toLocaleString('vi-VN') + "đ";
+            } else if (couponInput === "") {
+                voucherDiscount = 0;
+                msg.innerHTML = '';
+                document.getElementById('discountText').innerText = "-0đ";
+            } else {
+                voucherDiscount = 0;
+                msg.innerHTML = '<span class="text-danger"><i class="bi bi-x-circle-fill"></i> Mã giảm giá không khả dụng</span>';
+                document.getElementById('discountText').innerText = "-0đ";
+            }
+            updateTotal();
+        }
+
+        function updateTotal() {
+            // Tính chiết khấu 2% trên giá trị sản phẩm nếu chọn QR ngân hàng
+            let qrDiscount = isQRSelected ? Math.round(baseProductPrice * 0.02) : 0;
+            document.getElementById('qrDiscountText').innerText = "-" + qrDiscount.toLocaleString('vi-VN') + 'đ';
+            
+            // Tính tổng tiền cuối cùng
+            let totalFinal = baseProductPrice + shippingFee - voucherDiscount - qrDiscount;
+            document.getElementById('totalFinalText').innerText = totalFinal.toLocaleString('vi-VN') + 'đ';
+        }
+
+        function placeOrder() {
+            alert("🎉 Đặt hàng Smart Tivi Samsung thành công!\nĐội ngũ CSKH và kỹ thuật viên của DiMart sẽ liên hệ trực tiếp với bạn ngay lập tức để thống nhất giờ bàn giao lắp đặt.");
+            window.location.href = "index.html";
+        }
+
+        document.getElementById('addressForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Cập nhật thông tin giao tivi thành công!");
+            bootstrap.Modal.getInstance(document.getElementById('addressModal')).hide();
+        });
+    </script>
+</body>
+</html>

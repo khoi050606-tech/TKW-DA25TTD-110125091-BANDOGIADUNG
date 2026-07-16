@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán Đơn Hàng - DiMart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Dải màu chuẩn phong cách trang đặt hàng Shopee */
+        .shopee-border-top {
+            height: 4px;
+            width: 100%;
+            background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+        }
+        .checkout-section {
+            background: #fff;
+            padding: 24px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #00b159; /* Đồng bộ tông xanh chủ đạo của Máy xay sinh tố */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Hộp lựa chọn phương thức */
+        .selection-box {
+            border: 1px solid #dee2e6;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .selection-box:hover {
+            border-color: #00b159;
+            background-color: #f9fffb;
+        }
+        .selection-box.active {
+            border-color: #00b159;
+            color: #00b159;
+            background-color: #f9fffb;
+        }
+        .selection-box.active::after {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: #00b159;
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 4px;
+        }
+        .product-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+        .btn-order {
+            background: #00b159;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-order:hover {
+            background: #008e47;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white border-bottom py-3 mb-4 shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="text-decoration-none">
+                    <h3 class="fw-bold m-0 d-flex align-items-center gap-1" style="color: #00b159;">
+                        <i class="bi bi-shop-window"></i> DiMart
+                    </h3>
+                </a>
+                <div class="vr d-none d-sm-block" style="height: 30px;"></div>
+                <span class="fs-4 text-dark d-none d-sm-inline fw-semibold">Thanh Toán</span>
+            </div>
+            <a href="xxt.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                
+                <div class="checkout-section p-0 overflow-hidden">
+                    <div class="shopee-border-top"></div>
+                    <div class="p-4">
+                        <div class="section-title mb-3">
+                            <i class="bi bi-geo-alt-fill"></i> Địa Chi Nhận Hàng
+                        </div>
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">Nguyễn Văn A (+84) 339 022 75</span>
+                                <p class="text-secondary mb-0 mt-1 small">
+                                    Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long
+                                </p>
+                                <span class="badge border border-success text-success mt-2 small">Mặc định</span>
+                            </div>
+                            <button class="btn btn-link text-decoration-none text-primary p-0 small" data-bs-toggle="modal" data-bs-target="#addressModal">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <div class="section-title mb-3 text-dark">
+                        <i class="bi bi-bag-check-fill" style="color: #00b159;"></i> Sản Phẩm Đặt Mua
+                    </div>
+                    
+                    <div class="table-responsive d-none d-md-block">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr class="text-secondary small">
+                                    <th>Sản phẩm</th>
+                                    <th class="text-center">Đơn giá</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-end">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="sinhto.png" class="product-img" alt="Máy Xay Sinh Tố 1">
+                                            <div>
+                                                <h6 class="mb-1 fw-bold text-dark">Máy Xay Sinh Tố Đa Năng Cao Cấp - Máy Xay Sinh Tố 1</h6>
+                                                <span class="text-muted small">Loại: Cối nhựa cao cấp - Chống nứt vỡ</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center fw-semibold text-dark">220.000đ</td>
+                                    <td class="text-center text-secondary">1</td>
+                                    <td class="text-end fw-bold text-danger">220.000đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-block d-md-none border rounded p-3 mb-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <img src="sinhto.png" class="product-img" alt="Máy Xay Sinh Tố 1">
+                            <div>
+                                <h6 class="fw-bold mb-1 text-dark small">Máy Xay Sinh Tố Đa Năng Cao Cấp - Máy Xay Sinh Tố 1</h6>
+                                <div class="text-muted small mb-1">Số lượng: 1</div>
+                                <div class="fw-bold text-danger">220.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mt-3 g-2 bg-light p-3 rounded mx-0">
+                        <div class="col-12 col-sm-3">
+                            <label for="buyerNote" class="form-label mb-0 fw-semibold text-secondary small">Lời nhắn cho Shop:</label>
+                        </div>
+                        <div class="col-12 col-sm-9">
+                            <input type="text" id="buyerNote" class="form-control form-control-sm" placeholder="Lưu ý về giờ giao hàng hoặc yêu cầu kiểm tra máy trước...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-truck"></i> Chọn Cách Nhận Hàng / Vận Chuyển
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box active" onclick="selectShipping(this, 30000)">
+                                <div class="fw-bold text-dark">Giao Hàng Tiêu Chuẩn Toàn Quốc</div>
+                                <div class="text-muted small mt-1">Nhận hàng kiểm tra thử máy trước khi thanh toán (COD)</div>
+                                <div class="fw-bold text-dark mt-2">Phí ship: 30.000đ</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box" onclick="selectShipping(this, 55000)">
+                                <div class="fw-bold text-dark">Giao Hàng Hỏa Tốc (2H)</div>
+                                <div class="text-muted small mt-1">Áp dụng nội thành nhận nhanh bằng shipper công nghệ</div>
+                                <div class="fw-bold text-dark mt-2">Phí ship: 55.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-credit-card-2-back-fill"></i> Phương Thức Thanh Toán
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box active" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-cash-coin text-success"></i> COD (Tiền mặt)</div>
+                                <div class="text-muted small mt-1">Thanh toán khi nhận hàng</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-qr-code-scan text-primary"></i> Chuyển Khoản Ngân Hàng</div>
+                                <div class="text-muted small mt-1">Quét mã QR qua ứng dụng Banking</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-wallet2 text-danger"></i> Ví MoMo / ZaloPay</div>
+                                <div class="text-muted small mt-1">Liên kết ví điện tử thanh toán</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-lg-4">
+                
+                <div class="checkout-section">
+                    <div class="fw-bold text-dark mb-2"><i class="bi bi-ticket-perforated-fill text-danger"></i> DiMart Voucher</div>
+                    <div class="input-group">
+                        <input type="text" id="couponInput" class="form-control" placeholder="Nhập mã giảm giá (VD: MAYXAY20)">
+                        <button class="btn btn-secondary" type="button" onclick="applyCoupon()">Áp dụng</button>
+                    </div>
+                    <div id="couponMessage" class="small mt-2"></div>
+                </div>
+
+                <div class="checkout-section">
+                    <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom">Chi tiết thanh toán</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Tổng tiền hàng:</span>
+                        <span class="text-dark fw-semibold">220.000đ</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Phí vận chuyển:</span>
+                        <span id="shippingFeeText" class="text-dark fw-semibold">30.000đ</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3 small text-secondary">
+                        <span>Giảm giá Voucher:</span>
+                        <span id="discountText" class="text-success fw-bold">-0đ</span>
+                    </div>
+                    
+                    <hr class="my-3">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="fw-bold text-dark fs-5">Tổng thanh toán:</span>
+                        <span id="totalFinalText" class="fw-bold text-danger fs-3">250.000đ</span>
+                    </div>
+
+                    <button class="btn btn-order shadow" onclick="placeOrder()">
+                        <i class="bi bi-check-circle-fill"></i> ĐẶT HÀNG NGAY
+                    </button>
+                    
+                    <p class="text-center text-muted mt-3" style="font-size: 11px;">
+                        Nhấn đặt hàng đồng nghĩa với việc chấp nhận điều khoản mua bán tại hệ thống siêu thị điện máy DiMart.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Cập nhật thông tin nhận hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addressForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Họ và tên</label>
+                            <input type="text" class="form-control" value="Nguyễn Văn A" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Số điện thoại</label>
+                            <input type="tel" class="form-control" value="033902275" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Địa chỉ nhận hàng</label>
+                            <textarea class="form-control" rows="2" required>Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 py-2">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let baseProductPrice = 220000;
+        let shippingFee = 30000;
+        let discountAmount = 0;
+
+        function selectShipping(element, fee) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            
+            shippingFee = fee;
+            document.getElementById('shippingFeeText').innerText = fee.toLocaleString('vi-VN') + 'đ';
+            updateTotal();
+        }
+
+        function selectPayment(element) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function applyCoupon() {
+            let couponInput = document.getElementById('couponInput').value.trim().toUpperCase();
+            let msg = document.getElementById('couponMessage');
+            
+            if (couponInput === "MAYXAY20") {
+                discountAmount = 20000; // Giảm ngay 20k
+                msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> Áp dụng thành công! Giảm ngay 20.000đ</span>';
+                document.getElementById('discountText').innerText = "-" + discountAmount.toLocaleString('vi-VN') + "đ";
+            } else if (couponInput === "") {
+                discountAmount = 0;
+                msg.innerHTML = '';
+                document.getElementById('discountText').innerText = "-0đ";
+            } else {
+                discountAmount = 0;
+                msg.innerHTML = '<span class="text-danger"><i class="bi bi-x-circle-fill"></i> Mã giảm giá không đúng</span>';
+                document.getElementById('discountText').innerText = "-0đ";
+            }
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let totalFinal = baseProductPrice + shippingFee - discountAmount;
+            document.getElementById('totalFinalText').innerText = totalFinal.toLocaleString('vi-VN') + 'đ';
+        }
+
+        function placeOrder() {
+            alert("🎉 Đặt đơn hàng Máy Xay Sinh Tố thành công tại DiMart!\nBộ phận CSKH sẽ gọi điện xác nhận trong ít phút.");
+            window.location.href = "index.html";
+        }
+
+        document.getElementById('addressForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Đã ghi nhận thay đổi địa chỉ!");
+            bootstrap.Modal.getInstance(document.getElementById('addressModal')).hide();
+        });
+    </script>
+</body>
+</html>

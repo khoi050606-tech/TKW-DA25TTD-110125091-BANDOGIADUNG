@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiMart - Chi Tiết Sản Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Header */
+        .header-logo { width: 45px; height: 45px; border: 2px solid #00b159; object-fit: cover; }
+        .header-nav-link { color: #1a1a1a !important; font-weight: 700; font-size: 16px; text-decoration: none; }
+        .header-nav-link:hover { color: #00b159 !important; }
+        .search-box { max-width: 500px; }
+        .search-box .form-control:focus { border-color: #00b159; box-shadow: none; }
+        .search-box .btn-search { border: 1px solid #dee2e6; border-left: none; background-color: #fff; color: #00b159; }
+        .header-icon-btn { color: #333; font-size: 1.35rem; background: none; border: none; padding: 0 5px; }
+
+        /* Khung ảnh chi tiết */
+        .main-img-holder {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 5px;
+            background: #fff;
+        }
+        .thumb-img:hover, .thumb-img.active {
+            border-color: #00b159;
+            box-shadow: 0 0 0 2px rgba(0,177,89,0.2);
+        }
+
+        /* Chi tiết cấu hình phía phải */
+        .product-name-detail { font-size: 1.6rem; font-weight: 700; color: #212529; line-height: 1.4; }
+        .price-detail-now { color: #d93838; font-size: 1.8rem; font-weight: 700; }
+        .price-detail-old { color: #999; font-size: 1.1rem; text-decoration: line-through; }
+        
+        /* Hộp quà tặng khuyến mãi */
+        .promo-box {
+            border: 1px dashed #ff9800;
+            background-color: #fff8e1;
+            border-radius: 8px;
+        }
+
+        /* Nút tăng giảm số lượng */
+        .quantity-input { max-width: 60px; text-align: center; border-left: none; border-right: none; }
+        .btn-qty { border: 1px solid #dee2e6; background: #fff; width: 35px; }
+
+        /* Bảng thông số kỹ thuật */
+        .spec-table th { width: 35%; background-color: #f1f3f5; color: #495057; }
+
+        /* Footer */
+        .footer-section { background-color: #f4f5f6; color: #212529; font-size: 14px; }
+        .phone-link { color: #0d6efd; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 sticky-top shadow-sm">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="d-flex align-items-center gap-4">
+                <a class="navbar-brand p-0" href="index.html">
+                    <img src="logogd.png" alt="DiMart Logo" class="rounded-circle header-logo">
+                </a>
+                <nav class="d-none d-lg-flex align-items-center gap-4">
+                    <a class="nav-link header-nav-link text-nowrap" href="index.html">Trang chủ</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="#">bộ lọc sản phẩm</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="sanphamkhuyenmai.html">Sản phẩm khuyến mãi</a>
+                </nav>
+            </div>
+
+            <div class="input-group search-box flex-grow-1 mx-3 mx-md-5">
+                <input type="text" class="form-control text-sm py-2 px-3 border-end-0" placeholder="Tìm kiếm sản phẩm...">
+                <button class="btn btn-search px-3" type="button"><i class="bi bi-search fw-bold"></i></button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 gap-md-4">
+                <button class="header-icon-btn"><i class="bi bi-cart3"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-bell"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container py-4">
+        
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="dienmay.html" class="text-decoration-none text-secondary">Điện máy</a></li>
+                <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Smart Tivi Crystal UHD 4K 55 inch</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4 bg-white p-3 rounded-3 shadow-sm mx-0">
+            
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="main-img-holder">
+                    <img src="tivi.png" class="img-fluid" style="max-height: 100%; object-fit: contain;" alt="Ảnh chính sản phẩm">
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-3">
+                    <img src="tivi.png" class="thumb-img active" alt="Ảnh góc thẳng">
+                    
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-7">
+                <span class="badge bg-success mb-2"><i class="bi bi-check-circle-fill"></i> Còn hàng</span>
+                <h1 class="product-name-detail mb-2">Smart Tivi Crystal UHD 4K 55 inch Samsung UA55BU8000</h1>
+                
+                <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-3">
+                    <span class="price-detail-now">10.990.000đ</span>
+                    <span class="price-detail-old">13.500.000đ</span>
+                    <span class="badge bg-danger">-19%</span>
+                </div>
+
+                <div class="promo-box p-3 mb-4">
+                    <h6 class="fw-bold text-warning-emphasis mb-2"><i class="bi bi-gift-fill"></i> QUÀ TẶNG & KHUYẾN MÃI TRỊ GIÁ 1.500.000đ</h6>
+                    <ul class="mb-0 ps-3 text-secondary" style="font-size: 0.9rem;">
+                        <li class="mb-1">Miễn phí công lắp đặt và vật tư phụ giá treo tivi.</li>
+                        <li class="mb-1">Tặng gói tài khoản xem phim ứng dụng giải trí 12 tháng.</li>
+                        <li>Giảm thêm 2% khi thanh toán quét mã QR-Code qua ngân hàng.</li>
+                    </ul>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <span class="fw-semibold text-secondary" style="font-size: 0.95rem;">Số lượng:</span>
+                    <div class="d-flex">
+                        <button class="btn-qty rounded-start" type="button">-</button>
+                        <input type="text" class="form-control quantity-input rounded-0 form-control-sm" value="1">
+                        <button class="btn-qty rounded-end" type="button">+</button>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <a href="tttv.html" class="flex-grow-1 text-decoration-none">
+    <button type="button" class="btn text-white fw-bold w-100" style="background-color: #00b159; height: 50px;">
+        Mua ngay
+    </button> 
+                            <span class="d-block fw-normal style-sm" style="font-size: 0.75rem;">Giao hàng tận nơi nhanh chóng</span>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-outline-primary w-100 py-2.5 fw-bold" style="color: #0d6efd; font-size: 1rem;">
+                            <i class="bi bi-cart-plus-fill"></i> THÊM GIỎ HÀNG
+                            <span class="d-block fw-normal text-muted" style="font-size: 0.75rem;">Tích lũy điểm thưởng DiMart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row g-4 mt-3">
+            <div class="col-12 col-lg-7">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                    <h4 class="fw-bold border-bottom pb-2 mb-3">Đặc điểm nổi bật</h4>
+                    <p class="text-secondary" style="line-height: 1.7; font-size: 0.95rem;">
+                        Smart Tivi Crystal UHD 4K 55 inch sở hữu thiết kế thanh lịch AirSlim với độ mỏng ấn tượng, dễ dàng hòa hợp với mọi không gian nội thất phòng khách của bạn. Công nghệ hiển thị màu sắc sống động Dynamic Crystal Color mang lại hình ảnh sắc nét tuyệt đối, kết hợp bộ xử lý Crystal 4K tự động nâng cấp mọi nguồn nội dung lên chuẩn phân giải gần 4K nhất. Hệ điều hành Tizen thông minh trực quan giúp bạn dễ dàng kết nối và trải nghiệm các bộ phim điện ảnh đình đám.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded-3 shadow-sm mt-3">
+    <h4 class="fw-bold border-bottom pb-2 mb-3">
+        <i class="bi bi-book text-success"></i> Hướng Dẫn Sử Dụng & Lưu Ý
+    </h4>
+    
+    <ul class="nav nav-tabs mb-3" id="guideTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-semibold text-success" id="step-tab" data-bs-toggle="tab" data-bs-target="#step-content" type="button" role="tab">Các bước kết nối nhanh</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-semibold text-secondary" id="safety-tab" data-bs-toggle="tab" data-bs-target="#safety-content" type="button" role="tab">Lưu ý an toàn điện</button>
+        </li>
+    </ul>
+    
+    <div class="tab-content" id="guideTabContent" style="font-size: 0.95rem; line-height: 1.6;">
+        <div class="tab-pane fade show active text-secondary" id="step-content" role="tabpanel">
+            <ol class="ps-3">
+                <li class="mb-2"><strong class="text-dark">Bước 1: Kết nối nguồn điện:</strong> Cắm dây nguồn của thiết bị vào ổ điện ổn định từ 220V - 240V.</li>
+                <li class="mb-2"><strong class="text-dark">Bước 2: Thiết lập mạng Wifi:</strong> Vào phần cài đặt trên màn hình chính, chọn mục Mạng mạng và nhập mật khẩu Wi-Fi nhà bạn để kích hoạt kho ứng dụng.</li>
+                <li class="mb-2"><strong class="text-dark">Bước 3: Kết nối thiết bị ngoại vi:</strong> Sử dụng cổng HDMI (sau lưng máy) để kết nối với loa, đầu thu hoặc máy chơi game nếu có.</li>
+                <li><strong class="text-dark">Bước 4: Sử dụng điều khiển giọng nói:</strong> Nhấn giữ nút có biểu tượng Micro trên remote điều khiển thông minh để ra lệnh tìm kiếm bằng Tiếng Việt.</li>
+            </ol>
+        </div>
+        
+        <div class="tab-pane fade text-secondary" id="safety-content" role="tabpanel">
+            <ul class="ps-3" style="list-style-type: square;">
+                <li class="mb-2">Không đặt thiết bị ở những nơi ẩm ướt, gần bồn nước hoặc nơi có ánh nắng mặt trời chiếu trực tiếp.</li>
+                <li class="mb-2">Đảm bảo khoảng cách mặt sau của thiết bị cách tường tối thiểu 10cm để hệ thống tản nhiệt hoạt động tốt nhất.</li>
+                <li class="mb-2">Rút dây điện nguồn khi không sử dụng trong một thời gian dài hoặc khi có sấm sét lớn.</li>
+                <li>Không dùng khăn ướt hoặc chất tẩy rửa mạnh để lau trực tiếp lên bề mặt bảng mạch và màn hình điện tử.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="bg-white p-4 rounded-3 shadow-sm">
+        <h4 class="fw-bold border-bottom pb-2 mb-4">
+            <i class="bi bi-chat-left-heart-fill text-danger"></i> Khách Hàng Đánh Giá
+        </h4>
+
+        <div class="row g-4 align-items-center border-bottom pb-4 mb-4">
+            <div class="col-12 col-md-4 text-center border-end border-md-end-0">
+                <h1 class="display-3 fw-bold text-warning mb-1">4.8</h1>
+                <div class="text-warning fs-4 mb-2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <p class="text-muted mb-0">Tổng cộng 128 lượt đánh giá</p>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="width: 50px;" class="text-secondary fw-semibold">5 sao</span>
+                        <div class="progress flex-grow-1" style="height: 10px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 85%;"></div>
+                        </div>
+                        <span style="width: 35px;" class="text-end text-muted">85%</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="width: 50px;" class="text-secondary fw-semibold">4 sao</span>
+                        <div class="progress flex-grow-1" style="height: 10px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 10%;"></div>
+                        </div>
+                        <span style="width: 35px;" class="text-end text-muted">10%</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="width: 50px;" class="text-secondary fw-semibold">3 sao</span>
+                        <div class="progress flex-grow-1" style="height: 10px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 3%;"></div>
+                        </div>
+                        <span style="width: 35px;" class="text-end text-muted">3%</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="width: 50px;" class="text-secondary fw-semibold">2 sao</span>
+                        <div class="progress flex-grow-1" style="height: 10px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 1%;"></div>
+                        </div>
+                        <span style="width: 35px;" class="text-end text-muted">1%</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="width: 50px;" class="text-secondary fw-semibold">1 sao</span>
+                        <div class="progress flex-grow-1" style="height: 10px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 1%;"></div>
+                        </div>
+                        <span style="width: 35px;" class="text-end text-muted">1%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column gap-4">
+            <div class="d-flex gap-3 border-bottom pb-3">
+                <div class="flex-shrink-0">
+                    <div class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        AN
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="fw-bold mb-0">Nguyễn Văn An</h6>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.75rem;"><i class="bi bi-patch-check-fill"></i> Đã mua tại DiMart</span>
+                    </div>
+                    <div class="text-warning mb-1" style="font-size: 0.85rem;">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;">Tivi giao nhanh, đóng gói cẩn thận. Nhân viên kỹ thuật của DiMart tới lắp ráp nhiệt tình và hướng dẫn cài đặt mạng Wi-Fi rất chu đáo. Hình ảnh 4K xem bóng đá cực kỳ mượt và nét!</p>
+                    <small class="text-muted">Đã đánh giá vào ngày 28/06/2026</small>
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 border-bottom pb-3">
+                <div class="flex-shrink-0">
+                    <div class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        TH
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="fw-bold mb-0">Trần Thị Hồng</h6>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.75rem;"><i class="bi bi-patch-check-fill"></i> Đã mua tại DiMart</span>
+                    </div>
+                    <div class="text-warning mb-1" style="font-size: 0.85rem;">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                    </div>
+                    <p class="text-secondary mb-1" style="font-size: 0.95rem;">Màu sắc rực rỡ, âm thanh trong trẻo nghe nhạc rất hay. Thiết kế viền mỏng treo lên tường phòng khách nhìn rất sang trọng. Điểm trừ nhẹ là bấm remote giọng nói đôi lúc phải nói rõ chữ máy mới nhận diện được.</p>
+                    <small class="text-muted">Đã đánh giá vào ngày 25/06/2026</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-secondary btn-sm px-4 py-2 fw-semibold">Xem thêm các đánh giá khác (<span class="text-dark">126</span>)</button>
+        </div>
+    </div>
+</div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                    <h4 class="fw-bold border-bottom pb-2 mb-3">Thông số kỹ thuật</h4>
+                    <table class="table table-bordered spec-table mb-0" style="font-size: 0.9rem;">
+                        <tbody>
+                            <tr>
+                                <th>Kích cỡ màn hình</th>
+                                <td>55 inch</td>
+                            </tr>
+                            <tr>
+                                <th>Độ phân giải</th>
+                                <td>Ultra HD 4K (3840 x 2160)</td>
+                            </tr>
+                            <tr>
+                                <th>Loại màn hình</th>
+                                <td>LED viền (Edge LED)</td>
+                            </tr>
+                            <tr>
+                                <th>Hệ điều hành</th>
+                                <td>Tizen OS</td>
+                            </tr>
+                            <tr>
+                                <th>Nơi sản xuất</th>
+                                <td>Việt Nam</td>
+                            </tr>
+                            <tr>
+                                <th>Năm ra mắt</th>
+                                <td>2023</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer-section border-top pt-5 pb-4 mt-5">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="row g-4 text-start">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <h5 class="footer-title fw-bold">Siêu thị DiMart</h5>
+                    <div class="mb-1 text-muted">Mua hàng nhanh: <a href="#" class="phone-link fw-bold">(033) 90 22 75</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

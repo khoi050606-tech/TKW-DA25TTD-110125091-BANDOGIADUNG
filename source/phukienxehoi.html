@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiMart - Phụ Kiện Xe Hơi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Header */
+        .header-logo { width: 45px; height: 45px; border: 2px solid #00b159; object-fit: cover; }
+        .header-nav-link { color: #1a1a1a !important; font-weight: 700; font-size: 16px; text-decoration: none; }
+        .header-nav-link:hover { color: #00b159 !important; }
+        .search-box { max-width: 500px; }
+        .search-box .form-control:focus { border-color: #00b159; box-shadow: none; }
+        .search-box .btn-search { border: 1px solid #dee2e6; border-left: none; background-color: #fff; color: #00b159; }
+        .header-icon-btn { color: #333; font-size: 1.35rem; background: none; border: none; padding: 0 5px; }
+
+        /* Sidebar */
+        .sidebar-title { color: #d93838; font-size: 0.875rem; }
+        .category-link { color: #4a4a4a; font-size: 14px; text-decoration: none; transition: all 0.2s ease; }
+        .category-link.active { background-color: #e6f7ee !important; color: #00b159 !important; font-weight: bold; }
+        .category-link:hover { background-color: #f8f9fa !important; color: #00b159 !important; }
+
+        /* Khối nội dung & Sản phẩm */
+        .section-title { font-size: 1.6rem; font-weight: 700; color: #212529; }
+        .category-description { background-color: #fff; border-left: 4px solid #00b159; border-radius: 8px; font-size: 0.92rem; color: #555; }
+        .product-card { border: none; border-radius: 16px; overflow: hidden; transition: transform 0.2s ease; background: #fff; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important; }
+        .product-img-wrapper { height: 180px; display: flex; align-items: center; justify-content: center; padding: 15px; }
+        .product-img { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .product-title { font-size: 0.92rem; font-weight: 600; color: #212529; height: 42px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .price-current { color: #d93838; font-size: 1.05rem; font-weight: 700; }
+        .price-old { color: #999; font-size: 0.8rem; text-decoration: line-through; }
+        .btn-cart-add { border: 1px solid #0d6efd; color: #0d6efd; background-color: #fff; border-radius: 6px; padding: 6px 12px; }
+        .btn-buy-now { background-color: #0d6efd; color: #fff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem; }
+
+        /* Footer */
+        .footer-section { background-color: #f4f5f6; color: #212529; font-size: 14px; }
+        .footer-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; }
+        .footer-link { text-decoration: none; color: #4a4a4a; display: block; margin-bottom: 8px; }
+        .footer-link:hover { color: #00b159; }
+        .phone-link { color: #0d6efd; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 sticky-top shadow-sm">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="d-flex align-items-center gap-4">
+                <a class="navbar-brand p-0" href="index.html">
+                    <img src="logogd.png" alt="DiMart Logo" class="rounded-circle header-logo">
+                </a>
+                <nav class="d-none d-lg-flex align-items-center gap-4">
+                    <a class="nav-link header-nav-link text-nowrap" href="index.html">Trang chủ</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="#">bộ lọc sản phẩm</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="sanphamkhuyenmai.html">Sản phẩm khuyến mãi</a>
+                </nav>
+            </div>
+
+            <div class="input-group search-box flex-grow-1 mx-3 mx-md-5">
+                <input type="text" class="form-control text-sm py-2 px-3 border-end-0" placeholder="Tìm phụ kiện xe hơi...">
+                <button class="btn btn-search px-3" type="button"><i class="bi bi-search fw-bold"></i></button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 gap-md-4">
+                <button class="header-icon-btn"><i class="bi bi-cart3"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-bell"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid px-4 px-md-5 my-4">
+        <div class="row g-4">
+            
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="card border-0 shadow-sm py-3 rounded-3">
+                    <div class="sidebar-title fw-bold px-4 pb-3 border-bottom d-flex align-items-center gap-2">
+                        <i class="bi bi-list fs-5"></i> DANH MỤC SẢN PHẨM
+                    </div>
+                    <div class="list-group list-group-flush pt-2">
+                        <a href="dienmay.html" class="list-group-item list-group-item-action border-0 px-4 py-2.5 category-link fw-semibold d-flex align-items-center gap-3">
+                            <i class="bi bi-lightning-charge text-secondary fs-5"></i> Điện máy
+                        </a>
+                        <a href="giadung.html" class="list-group-item list-group-item-action border-0 px-4 py-2.5 category-link fw-semibold d-flex align-items-center gap-3">
+                            <i class="bi bi-house-door text-secondary fs-5"></i> Đồ gia dụng và điện tử
+                        </a>
+                        <a href="phukienxehoi.html" class="list-group-item list-group-item-action border-0 px-4 py-2.5 category-link active d-flex align-items-center gap-3">
+                            <i class="bi bi-car-front fs-5"></i> Phụ kiện xe hơi
+                        </a>                                            
+                        <a href="sanphamkhuyenmai.html" class="list-group-item list-group-item-action border-0 px-4 py-2.5 category-link fw-semibold d-flex align-items-center gap-3">
+                            <i class="bi bi-tags text-secondary fs-5"></i> Khuyến mãi lớn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-9">
+                
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Trang chủ</a></li>
+                        <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Phụ kiện xe hơi</li>
+                    </ol>
+                </nav>
+
+                <h2 class="section-title mb-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-car-front-fill text-danger"></i> Đồ Chơi & Phụ Kiện Xe Hơi
+                    <span class="fs-6 text-secondary fw-normal">(8 sản phẩm)</span>
+                </h2>
+
+                <div class="category-description p-3 mb-4 shadow-sm">
+                    <p class="mb-0 text-muted">Tổng hợp các thiết bị thông minh, tẩu sạc, máy hút bụi mini, camera hành trình và phụ kiện tiện ích giúp nâng cấp trải nghiệm lái xe an toàn của bạn.</p>
+                </div>
+                
+                <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3">
+                    
+                   <div class="col">
+    <div class="card product-card shadow-sm h-100 p-3">
+        <a href="ct.html" class="product-img-wrapper d-block text-decoration-none">
+            <img src="cammera.png" class="product-img" alt="Camera hành trình">
+        </a>
+        
+        <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+            <div>
+                <a href="ct.html" class="text-decoration-none text-dark">
+                    <h5 class="product-title mb-2">Camera Hành Trình 4K Ghi Hình Trước Sau</h5>
+                </a>
+                
+                <div class="d-flex align-items-center flex-wrap gap-1 mb-3">
+                    <span class="price-current">2.490.000đ</span>
+                    <span class="price-old">3.200.000đ</span>
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2 mt-auto">
+                <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                
+                <a href="ct.html" class="btn-buy-now flex-grow-1 text-center text-decoration-none d-flex align-items-center justify-content-center text-white fw-semibold rounded py-1.5" style="background-color: var(--dimart-green, #0fa958); cursor: pointer;">
+                    Mua ngay
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="bom.png" class="product-img" alt="Bơm lốp ô tô"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Bơm Lốp Ô Tô Điện Tử Tự Động Ngắt Thông Minh</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">750.000đ</span><span class="price-old">990.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="hutbui.png" class="product-img" alt="Máy hút bụi ô tô"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Máy Hút Bụi Ô Tô Cầm Tay Không Dây Lực Hút Mạnh</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">490.000đ</span><span class="price-old">650.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="tau.png" class="product-img" alt="Tẩu sạc ô tô"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Tẩu Sạc Nhanh Ô Tô Cao Cấp Cổng Type-C 45W</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">280.000đ</span><span class="price-old">390.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="gia.png" class="product-img" alt="Giá đỡ điện thoại"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Giá Đỡ Điện Thoại Cửa Gió Kiêm Sạc Không Dây</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">390.000đ</span><span class="price-old">550.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="locoto.png" class="product-img" alt="Máy lọc không khí"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Máy Lọc Không Khí Ô Tô HEPA Khử Mùi Da</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">890.000đ</span><span class="price-old">1.200.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="cambien.png" class="product-img" alt="Cảm biến áp suất lốp"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Cảm Biến Áp Suất Lốp Van Ngoài Năng Lượng Mặt Trời</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">1.150.000đ</span><span class="price-old">1.500.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card product-card shadow-sm h-100 p-3">
+                            <div class="product-img-wrapper"><img src="demhoi.png" class="product-img" alt="Đệm hơi ô tô"></div>
+                            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="product-title mb-2">Đệm Hơi Ô Tô Vải Nhung Cao Cấp Hàng Ghế Sau</h5>
+                                    <div class="d-flex align-items-center flex-wrap gap-1 mb-3"><span class="price-current">350.000đ</span><span class="price-old">500.000đ</span></div>
+                                </div>
+                                <div class="d-flex gap-2 mt-auto">
+                                    <button class="btn-cart-add"><i class="bi bi-cart-plus"></i></button>
+                                    <a href="#" class="flex-grow-1 text-decoration-none d-flex">
+                                        <button class="btn-buy-now w-100 border-0 text-white fw-semibold rounded py-1.5">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer-section border-top pt-5 pb-4 mt-5">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="row g-4 text-start">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <h5 class="footer-title">Tổng đài hỗ trợ DiMart</h5>
+                    <div class="mb-1">Mua hàng: <a href="#" class="phone-link">(033) 90 22 75</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán Camera Hành Trình - DiMart</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Dải sọc màu trang nhã phong cách đặt hàng chuyên nghiệp */
+        .shopee-border-top {
+            height: 4px;
+            width: 100%;
+            background-image: repeating-linear-gradient(45deg, #0d6efd, #0d6efd 33px, transparent 0, transparent 41px, #ffc107 0, #ffc107 74px, transparent 0, transparent 82px);
+        }
+        .checkout-section {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0d6efd; /* Tông màu xanh dương đồng bộ nút MUA NGAY */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Hộp lựa chọn phương thức */
+        .selection-box {
+            border: 1px solid #dee2e6;
+            padding: 14px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .selection-box:hover {
+            border-color: #0d6efd;
+            background-color: #f0f6ff;
+        }
+        .selection-box.active {
+            border-color: #0d6efd;
+            color: #0d6efd;
+            background-color: #f0f6ff;
+        }
+        .selection-box.active::after {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: #0d6efd;
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 6px;
+        }
+        .product-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            background: #fff;
+        }
+        .badge-feature {
+            font-size: 0.75rem;
+            background-color: #eef5ff;
+            color: #0d6efd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .btn-order {
+            background: #0d6efd;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-order:hover {
+            background: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER TRANG THANH TOÁN -->
+    <header class="bg-white border-bottom py-3 mb-4 shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="text-decoration-none">
+                    <h3 class="fw-bold m-0 d-flex align-items-center gap-1" style="color: #0d6efd;">
+                        <i class="bi bi-shop-window"></i> DiMart
+                    </h3>
+                </a>
+                <div class="vr d-none d-sm-block" style="height: 30px;"></div>
+                <span class="fs-4 text-dark d-none d-sm-inline fw-semibold">Thanh Toán</span>
+            </div>
+            <a href="ct.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            <!-- CỘT TRÁI: THÔNG TIN SẢN PHẨM & ĐỊA CHỈ -->
+            <div class="col-12 col-lg-8">
+                
+                <!-- 1. ĐỊA CHỈ NHẬN HÀNG / LẮP ĐẶT -->
+                <div class="checkout-section p-0 overflow-hidden">
+                    <div class="shopee-border-top"></div>
+                    <div class="p-4">
+                        <div class="section-title mb-3">
+                            <i class="bi bi-geo-alt-fill"></i> Địa Chỉ Nhận Hàng & Lắp Đặt
+                        </div>
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">Nguyễn Văn A (+84) 339 022 75</span>
+                                <p class="text-secondary mb-0 mt-1 small">
+                                    Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long
+                                </p>
+                                <span class="badge border border-primary text-primary mt-2 small">Mặc định</span>
+                            </div>
+                            <button class="btn btn-link text-decoration-none text-primary p-0 small" data-bs-toggle="modal" data-bs-target="#addressModal">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DANH SÁCH SẢN PHẨM ĐẶT MUA -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3 text-dark">
+                        <i class="bi bi-bag-check-fill text-primary"></i> Sản Phẩm Đặt Mua
+                    </div>
+                    
+                    <div class="table-responsive d-none d-md-block">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr class="text-secondary small">
+                                    <th>Sản phẩm</th>
+                                    <th class="text-center">Đơn giá</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-end">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <!-- Thay thế placeholder bằng link ảnh thật nếu có -->
+                                            <img src="cammera.png" class="product-img" alt="Camera Hành Trình 4K">
+                                            <div>
+                                                <h6 class="mb-1 fw-bold text-dark">Camera Hành Trình 4K Ghi Hình Trước Sau</h6>
+                                                <div class="d-flex gap-1 flex-wrap">
+                                                    <span class="badge-feature">Ultra HD 4K + 1080P</span>
+                                                    <span class="badge-feature">Dual Sony HDR</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center fw-semibold text-dark">2.490.000đ</td>
+                                    <td class="text-center text-secondary">1</td>
+                                    <td class="text-end fw-bold text-danger">2.490.000đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Giao diện Mobile thu gọn -->
+                    <div class="d-block d-md-none border rounded p-3 mb-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <img src="cammera.png" class="product-img" alt="Camera Hành Trình 4K">
+                            <div>
+                                <h6 class="fw-bold mb-1 text-dark small">Camera Hành Trình 4K Ghi Hình Trước Sau</h6>
+                                <div class="text-muted small mb-1">Số lượng: 1</div>
+                                <div class="fw-bold text-danger">2.490.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ghi chú dòng xe lắp đặt -->
+                    <div class="row align-items-center mt-3 g-2 bg-light p-3 rounded mx-0">
+                        <div class="col-12 col-sm-3">
+                            <label for="carModel" class="form-label mb-0 fw-semibold text-secondary small">Tên dòng xe / Đời xe:</label>
+                        </div>
+                        <div class="col-12 col-sm-9">
+                            <input type="text" id="carModel" class="form-control form-control-sm" placeholder="Ví dụ: Toyota Vios 2022 (Để kỹ thuật viên chuẩn bị sẵn jack cắm zin)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. PHƯƠNG THỨC GIAO HÀNG & LẮP ĐẶT -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-tools"></i> Tùy Chọn Lắp Đặt & Vận Chuyển
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box active" onclick="selectShipping(this, 0)">
+                                <div class="fw-bold text-dark">Đến Lắp Đặt Tại Cửa Hàng DiMart</div>
+                                <div class="text-muted small mt-1">Đến hệ thống cửa hàng gần nhất để được kỹ thuật viên lắp đặt miễn phí đi dây âm gọn gàng</div>
+                                <div class="fw-bold text-success mt-2">Phí lắp đặt: MIỄN PHÍ</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="selection-box" onclick="selectShipping(this, 150000)">
+                                <div class="fw-bold text-dark">Giao Hàng & Kỹ Thuật Lắp Tận Nhà</div>
+                                <div class="text-muted small mt-1">Kỹ thuật viên mang thiết bị đến tận nhà đi dây âm nguồn, hướng dẫn kích hoạt kết nối điện thoại</div>
+                                <div class="fw-bold text-dark mt-2">Phí dịch vụ tận nhà: 150.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PHƯƠNG THỨC THANH TOÁN -->
+                <div class="checkout-section">
+                    <div class="section-title mb-3">
+                        <i class="bi bi-credit-card-2-back-fill"></i> Phương Thức Thanh Toán
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box active" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-cash-coin text-success"></i> COD (Nhận hàng trả tiền)</div>
+                                <div class="text-muted small mt-1">Thanh toán sau khi kỹ thuật viên lắp hoàn chỉnh thiết bị</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-qr-code-scan text-primary"></i> Chuyển Khoản / QR</div>
+                                <div class="text-muted small mt-1">Quét mã QR ngân hàng nhanh chóng</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="selection-box" onclick="selectPayment(this)">
+                                <div class="fw-bold text-dark"><i class="bi bi-wallet2 text-danger"></i> Ví Điện Tử</div>
+                                <div class="text-muted small mt-1">Thanh toán qua ví MoMo hoặc ZaloPay</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CỘT PHẢI: MÃ GIẢM GIÁ & TÍNH TOÁN HÓA ĐƠN -->
+            <div class="col-12 col-lg-4">
+                
+                <!-- MÃ GIẢM GIÁ (VOUCHER) -->
+                <div class="checkout-section">
+                    <div class="fw-bold text-dark mb-2"><i class="bi bi-ticket-perforated-fill text-danger"></i> DiMart Voucher</div>
+                    <div class="input-group">
+                        <input type="text" id="couponInput" class="form-control" placeholder="Nhập mã giảm giá (VD: CAM4K90)">
+                        <button class="btn btn-dark" type="button" onclick="applyCoupon()">Áp dụng</button>
+                    </div>
+                    <div id="couponMessage" class="small mt-2"></div>
+                </div>
+
+                <!-- BẢNG TÍNH TIỀN TỔNG -->
+                <div class="checkout-section">
+                    <h5 class="fw-bold text-dark mb-4 pb-2 border-bottom">Chi tiết thanh toán</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Tổng tiền thiết bị:</span>
+                        <span class="text-dark fw-semibold">2.490.000đ</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2 small text-secondary">
+                        <span>Phí lắp đặt & vận chuyển:</span>
+                        <span id="shippingFeeText" class="text-dark fw-semibold">0đ</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3 small text-secondary">
+                        <span>Giảm giá Voucher:</span>
+                        <span id="discountText" class="text-success fw-bold">-0đ</span>
+                    </div>
+                    
+                    <hr class="my-3">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="fw-bold text-dark fs-5">Tổng thanh toán:</span>
+                        <!-- Mặc định: 2.490.000đ + 0đ = 2.490.000đ -->
+                        <span id="totalFinalText" class="fw-bold text-danger fs-3">2.490.000đ</span>
+                    </div>
+
+                    <!-- Nút Đặt đơn hàng -->
+                    <button class="btn btn-order shadow" onclick="placeOrder()">
+                        <i class="bi bi-check-circle-fill"></i> ĐẶT HÀNG NGAY
+                    </button>
+                    
+                    <p class="text-center text-muted mt-3 mb-0" style="font-size: 11px;">
+                        Kỹ thuật viên sẽ liên hệ lại ngay với quý khách sau khi tiếp nhận để sắp xếp thời gian lắp đặt thuận tiện nhất.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL THAY ĐỔI ĐỊA CHỈ -->
+    <div class="modal fade" id="addressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Cập nhật thông tin lắp đặt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addressForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Họ và tên chủ xe</label>
+                            <input type="text" class="form-control" value="Nguyễn Văn A" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Số điện thoại liên lạc</label>
+                            <input type="tel" class="form-control" value="033902275" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Địa chỉ nhận xe lắp đặt</label>
+                            <textarea class="form-control" rows="2" required>Số 123 Đường Nguyễn Huệ, Phường 1, Thành phố Vĩnh Long, Tỉnh Vĩnh Long</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Xác nhận cập nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- LOGIC TỰ ĐỘNG TÍNH TIỀN HÓA ĐƠN -->
+    <script>
+        let baseProductPrice = 2490000; // Giá bán gốc của camera
+        let shippingFee = 0;           // Mặc định là lắp đặt miễn phí tại cửa hàng
+        let discountAmount = 0;
+
+        function selectShipping(element, fee) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            
+            shippingFee = fee;
+            document.getElementById('shippingFeeText').innerText = fee.toLocaleString('vi-VN') + 'đ';
+            updateTotal();
+        }
+
+        function selectPayment(element) {
+            let boxes = element.parentElement.parentElement.querySelectorAll('.selection-box');
+            boxes.forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function applyCoupon() {
+            let couponInput = document.getElementById('couponInput').value.trim().toUpperCase();
+            let msg = document.getElementById('couponMessage');
+            
+            if (couponInput === "CAM4K90") {
+                discountAmount = 90000; // Ưu đãi giảm ngay 90.000đ
+                msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> Áp dụng thành công! Giảm ngay 90.000đ</span>';
+                document.getElementById('discountText').innerText = "-" + discountAmount.toLocaleString('vi-VN') + "đ";
+            } else if (couponInput === "") {
+                discountAmount = 0;
+                msg.innerHTML = '';
+                document.getElementById('discountText').innerText = "-0đ";
+            } else {
+                discountAmount = 0;
+                msg.innerHTML = '<span class="text-danger"><i class="bi bi-x-circle-fill"></i> Mã không tồn tại</span>';
+                document.getElementById('discountText').innerText = "-0đ";
+            }
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let totalFinal = baseProductPrice + shippingFee - discountAmount;
+            document.getElementById('totalFinalText').innerText = totalFinal.toLocaleString('vi-VN') + 'đ';
+        }
+
+        function placeOrder() {
+            alert("🎉 Đặt mua Camera hành trình thành công!\nBộ phận kỹ thuật lắp đặt của DiMart sẽ liên hệ trực tiếp cho bạn để xếp lịch sớm nhất.");
+            window.location.href = "index.html";
+        }
+
+        document.getElementById('addressForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Đã lưu cập nhật thông tin lắp đặt!");
+            bootstrap.Modal.getInstance(document.getElementById('addressModal')).hide();
+        });
+    </script>
+</body>
+</html>

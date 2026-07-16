@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nồi Chiên Không Dầu Điện Tử 6.5L - DiMart</title>
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Nhúng Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Header */
+        .header-logo { width: 45px; height: 45px; border: 2px solid #00b159; object-fit: cover; }
+        .header-nav-link { color: #1a1a1a !important; font-weight: 700; font-size: 16px; text-decoration: none; }
+        .header-nav-link:hover { color: #00b159 !important; }
+        .search-box { max-width: 500px; }
+        .search-box .form-control:focus { border-color: #00b159; box-shadow: none; }
+        .search-box .btn-search { border: 1px solid #dee2e6; border-left: none; background-color: #fff; color: #00b159; }
+        .header-icon-btn { color: #333; font-size: 1.35rem; background: none; border: none; padding: 0 5px; }
+
+        /* Chi tiết sản phẩm */
+        .product-gallery {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .main-img-wrapper {
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .main-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .thumb-img.active, .thumb-img:hover {
+            border-color: #0d6efd;
+        }
+
+        /* Giá & Nhãn */
+        .price-current { color: #d93838; font-size: 2rem; font-weight: 700; }
+        .price-old { color: #999; font-size: 1.2rem; text-decoration: line-through; }
+        .badge-sale { background-color: #fff0f0; color: #d93838; font-weight: bold; border: 1px solid #ffcccc; }
+
+        /* Bộ đếm số lượng */
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border-left: none;
+            border-right: none;
+            border-color: #dee2e6;
+        }
+        .btn-quantity {
+            border: 1px solid #dee2e6;
+            background: #fff;
+            width: 40px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .btn-quantity:hover { background: #f8f9fa; }
+
+        /* Nút mua hàng */
+        .btn-add-to-cart {
+            border: 2px solid #0d6efd;
+            color: #0d6efd;
+            background: #fff;
+            font-weight: 600;
+            height: 50px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-add-to-cart:hover {
+            background: #f0f5ff;
+        }
+        .btn-buy-now {
+            background: #0d6efd;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            height: 50px;
+            border-radius: 8px;
+        }
+        .btn-buy-now:hover {
+            background: #0b5ed7;
+        }
+
+        /* Dịch vụ đi kèm */
+        .service-item {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a4a4a;
+        }
+        .service-icon {
+            color: #28a745;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer-section { background-color: #f4f5f6; color: #212529; font-size: 14px; }
+        .footer-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; }
+        .footer-link { text-decoration: none; color: #4a4a4a; display: block; margin-bottom: 8px; }
+        .footer-link:hover { color: #00b159; }
+        .phone-link { color: #0d6efd; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR / HEADER ================= -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 sticky-top shadow-sm">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="d-flex align-items-center gap-4">
+                <a class="navbar-brand p-0" href="index.html">
+                    <img src="logogd.png" alt="DiMart Logo" class="rounded-circle header-logo">
+                </a>
+                <nav class="d-none d-lg-flex align-items-center gap-4">
+                    <a class="nav-link header-nav-link text-nowrap" href="index.html">Trang chủ</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="#">Sản phẩm mới</a>
+                    <a class="nav-link header-nav-link text-nowrap text-danger" href="sanpphamkhuyenmai.html"><i class="bi bi-fire"></i> Khuyến mãi hot</a>
+                </nav>
+            </div>
+
+            <div class="input-group search-box flex-grow-1 mx-3 mx-md-5">
+                <input type="text" class="form-control text-sm py-2 px-3 border-end-0" placeholder="Tìm kiếm sản phẩm gia dụng...">
+                <button class="btn btn-search px-3" type="button"><i class="bi bi-search fw-bold"></i></button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 gap-md-4">
+                <button class="header-icon-btn"><i class="bi bi-cart3"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-bell"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN SECTION ================= -->
+    <div class="container-fluid px-4 px-md-5 my-4">
+        
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="giadung.html" class="text-decoration-none text-secondary">Thiết bị gia dụng</a></li>
+                <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Nồi Chiên Không Dầu</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4">
+            
+            <!-- CỘT TRÁI: ẢNH SẢN PHẨM -->
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="product-gallery border-0 shadow-sm">
+                    <div class="main-img-wrapper mb-3">
+                        <img src="noidep.png" id="mainImage" class="main-img" alt="Nồi chiên không dầu điện tử">
+                    </div>
+                    <!-- Album ảnh nhỏ phụ -->
+                    <div class="d-flex gap-2 justify-content-center">
+                        <img src="noidep.png" class="thumb-img active" onclick="changeImage(this)">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI: THÔNG TIN CHI TIẾT SẢN PHẨM -->
+            <div class="col-12 col-md-6 col-lg-7">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <!-- Tên thương hiệu & Đánh giá sơ bộ -->
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-primary">CHÍNH HÃNG</span>
+                        <div class="text-warning small">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            
+                            
+                            
+                            <span class="text-muted ms-1">(4.8/5 với 128 đánh giá)</span>
+                        </div>
+                    </div>
+
+                    <!-- Tên sản phẩm chính thức -->
+                    <h1 class="fs-3 fw-bold text-dark mb-3">Nồi Chiên Không Dầu Điện Tử 6.5L</h1>
+
+                    <!-- Khu vực giá cả -->
+                    <div class="bg-light rounded-3 p-3 mb-4 d-flex align-items-center gap-3">
+                        <span class="price-current">1.450.000đ</span>
+                        <span class="price-old">1.950.000đ</span>
+                        <span class="badge badge-sale py-2 px-3 rounded-pill">-25% OFF</span>
+                    </div>
+
+                    <!-- Mô tả ngắn sản phẩm -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Điểm nổi bật:</h6>
+                        <ul class="text-muted ps-3 small">
+                            <li>Dung tích cực đại 6.5L, nướng vừa cả một con gà nguyên con dễ dàng.</li>
+                            <li>Bảng điều khiển màn hình LED cảm ứng điện tử siêu nhạy 1 chạm.</li>
+                            <li>Công nghệ gia nhiệt Rapid Air tuần hoàn 360 độ giúp thực phẩm chín đều bên trong, giòn rụm bên ngoài.</li>
+                            <li>Lòng nồi bằng inox không gỉ phủ lớp chống dính Teflon siêu bền, an toàn sức khỏe và dễ tháo rời vệ sinh.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Chọn số lượng đặt hàng -->
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="fw-bold text-secondary">Số lượng:</span>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-quantity rounded-start" onclick="decreaseQty()">-</button>
+                            <input type="text" id="quantity" class="form-control quantity-input" value="1" readonly>
+                            <button class="btn btn-quantity rounded-end" onclick="increaseQty()">+</button>
+                        </div>
+                        <span class="text-muted small">Tồn kho: Còn 15 sản phẩm</span>
+                    </div>
+
+                    <!-- Nút hành động Mua hàng -->
+                    <div class="row g-2 mb-4">
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-add-to-cart w-100 d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-cart-plus fs-5"></i> Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-buy-now w-100">MUA NGAY</button>
+                        </div>
+                    </div>
+
+                    <!-- Chính sách cam kết đi kèm -->
+                    <hr class="my-3">
+                    <div class="row g-3">
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-shield-check service-icon"></i>
+                            <span>Bảo hành chính hãng <b>12 tháng</b></span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-truck service-icon"></i>
+                            <span>Miễn phí ship bán kính <b>10km</b></span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-arrow-repeat service-icon"></i>
+                            <span>Lỗi 1 đổi 1 trong vòng <b>7 ngày</b></span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-patch-check service-icon"></i>
+                            <span>Cam kết chính hãng <b>100%</b></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PHẦN CHI TIẾT SẢN PHẨM KHÁC (TABS THÔNG TIN) -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm p-4">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bold text-dark" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">Thông số kỹ thuật</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold text-dark" id="guide-tab" data-bs-toggle="tab" data-bs-target="#guide" type="button" role="tab">Hướng dẫn sử dụng</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-4" id="myTabContent">
+                        <!-- Tab thông số kỹ thuật -->
+                        <div class="tab-pane fade show active" id="specs" role="tabpanel">
+                            <table class="table table-striped table-bordered table-sm max-width-600">
+                                <tbody>
+                                    <tr><td class="fw-bold px-3 py-2" style="width: 30%">Dung tích</td><td class="px-3 py-2">6.5 Lít</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Công suất</td><td class="px-3 py-2">1800W</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Điện áp</td><td class="px-3 py-2">220V / 50Hz</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Nhiệt độ tối đa</td><td class="px-3 py-2">80 - 200 độ C</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Chất liệu vỏ</td><td class="px-3 py-2">Nhựa ABS cao cấp cách nhiệt dẻo dai</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Hẹn giờ</td><td class="px-3 py-2">Tối đa 60 phút có âm báo tự ngắt</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Tab hướng dẫn sử dụng -->
+                        <div class="tab-pane fade" id="guide" role="tabpanel">
+                            <p class="text-muted">1. Cắm phích nguồn vào ổ điện gia dụng an toàn.</p>
+                            <p class="text-muted">2. Cho thực phẩm đã sơ chế và ướp gia vị vào khay nướng (nên quét một lớp dầu mỏng lên bề mặt để thức ăn được ngậy và không bị khô).</p>
+                            <p class="text-muted">3. Chỉnh nhiệt độ và đặt hẹn giờ theo loại thực phẩm mong muốn hiển thị trên bảng nút cảm ứng điện tử.</p>
+                            <p class="text-muted">4. Khi nồi phát tiếng chuông báo hiệu kết thúc thời gian, tháo khay hứng dầu kéo nhẹ khay ra ngoài và thưởng thức thành phẩm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-section border-top pt-5 pb-4 mt-5">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="row g-4 text-start">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <h5 class="footer-title">Tổng đài hỗ trợ DiMart</h5>
+                    <div class="mb-1">Mua hàng: <a href="#" class="phone-link">(033) 90 22 75</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script Tương tác tăng/giảm số lượng & đổi ảnh con -->
+    <script>
+        // Thay đổi ảnh lớn khi bấm ảnh nhỏ
+        function changeImage(element) {
+            document.getElementById('mainImage').src = element.src;
+            // Xóa trạng thái active của ảnh cũ
+            let thumbs = document.querySelectorAll('.thumb-img');
+            thumbs.forEach(thumb => thumb.classList.remove('active'));
+            // Thêm active cho ảnh hiện tại
+            element.classList.add('active');
+        }
+
+        // Tăng giảm số lượng sản phẩm
+        let qtyInput = document.getElementById('quantity');
+        function increaseQty() {
+            let currentVal = parseInt(qtyInput.value);
+            if(currentVal < 15) { // Giới hạn theo lượng hàng trong kho
+                qtyInput.value = currentVal + 1;
+            }
+        }
+        function decreaseQty() {
+            let currentVal = parseInt(qtyInput.value);
+            if(currentVal > 1) {
+                qtyInput.value = currentVal - 1;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Hành Trình 4K Ghi Hình Trước Sau - DiMart</title>
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Nhúng Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Header */
+        .header-logo { width: 45px; height: 45px; border: 2px solid #00b159; object-fit: cover; }
+        .header-nav-link { color: #1a1a1a !important; font-weight: 700; font-size: 16px; text-decoration: none; }
+        .header-nav-link:hover { color: #00b159 !important; }
+        .search-box { max-width: 500px; }
+        .search-box .form-control:focus { border-color: #00b159; box-shadow: none; }
+        .search-box .btn-search { border: 1px solid #dee2e6; border-left: none; background-color: #fff; color: #00b159; }
+        .header-icon-btn { color: #333; font-size: 1.35rem; background: none; border: none; padding: 0 5px; }
+
+        /* Chi tiết sản phẩm */
+        .product-gallery {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .main-img-wrapper {
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .main-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .thumb-img.active, .thumb-img:hover {
+            border-color: #0d6efd;
+        }
+
+        /* Giá & Nhãn */
+        .price-current { color: #d93838; font-size: 2rem; font-weight: 700; }
+        .price-old { color: #999; font-size: 1.2rem; text-decoration: line-through; }
+        .badge-sale { background-color: #fff0f0; color: #d93838; font-weight: bold; border: 1px solid #ffcccc; }
+
+        /* Bộ đếm số lượng */
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border-left: none;
+            border-right: none;
+            border-color: #dee2e6;
+        }
+        .btn-quantity {
+            border: 1px solid #dee2e6;
+            background: #fff;
+            width: 40px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .btn-quantity:hover { background: #f8f9fa; }
+
+        /* Nút mua hàng (Dùng màu xanh Blue đặc trưng của hệ thống nút trong ảnh) */
+        .btn-add-to-cart {
+            border: 2px solid #0d6efd;
+            color: #0d6efd;
+            background: #fff;
+            font-weight: 600;
+            height: 50px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-add-to-cart:hover {
+            background: #f0f5ff;
+        }
+        .btn-buy-now {
+            background: #0d6efd;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            height: 50px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .btn-buy-now:hover {
+            background: #0b5ed7;
+        }
+
+        /* Cam kết dịch vụ */
+        .service-item {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a4a4a;
+        }
+        .service-icon {
+            color: #0d6efd;
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        .footer-section { background-color: #f4f5f6; color: #212529; font-size: 14px; }
+        .footer-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 15px; }
+        .footer-link { text-decoration: none; color: #4a4a4a; display: block; margin-bottom: 8px; }
+        .footer-link:hover { color: #00b159; }
+        .phone-link { color: #0d6efd; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR / HEADER ================= -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 sticky-top shadow-sm">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="d-flex align-items-center gap-4">
+                <a class="navbar-brand p-0" href="index.html">
+                    <img src="logogd.png" alt="DiMart Logo" class="rounded-circle header-logo">
+                </a>
+                <nav class="d-none d-lg-flex align-items-center gap-4">
+                    <a class="nav-link header-nav-link text-nowrap" href="index.html">Trang chủ</a>
+                    <a class="nav-link header-nav-link text-nowrap" href="#">Sản phẩm mới</a>
+                    <a class="nav-link header-nav-link text-nowrap text-danger" href="sanphamkhuyenmai.html"><i class="bi bi-fire"></i> Khuyến mãi hot</a>
+                </nav>
+            </div>
+
+            <div class="input-group search-box flex-grow-1 mx-3 mx-md-5">
+                <input type="text" class="form-control text-sm py-2 px-3 border-end-0" placeholder="Tìm kiếm phụ kiện ô tô...">
+                <button class="btn btn-search px-3" type="button"><i class="bi bi-search fw-bold"></i></button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 gap-md-4">
+                <button class="header-icon-btn"><i class="bi bi-cart3"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-bell"></i></button>
+                <button class="header-icon-btn"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN SECTION ================= -->
+    <div class="container-fluid px-4 px-md-5 my-4">
+        
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="phukienxehoi.html" class="text-decoration-none text-secondary">Phụ kiện xe hơi</a></li>
+                <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Camera hành trình</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4">
+            
+            <!-- CỘT TRÁI: ẢNH SẢN PHẨM -->
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="product-gallery border-0 shadow-sm">
+                    <div class="main-img-wrapper mb-3">
+                        <!-- Đường dẫn ảnh chính thức -->
+                        <img src="cammera.png" id="mainImage" class="main-img" alt="Camera Hành Trình 4K">
+                    </div>
+                    <!-- Album ảnh phụ nhỏ ở dưới -->
+                    <div class="d-flex gap-2 justify-content-center">
+                        <img src="cammera.png" class="thumb-img active" onclick="changeImage(this)">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI: THÔNG TIN CHI TIẾT SẢN PHẨM -->
+            <div class="col-12 col-md-6 col-lg-7">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-primary">CHÍNH HÃNG ULTRA HD</span>
+                        <div class="text-warning small">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-muted ms-1">(5.0/5 với 94 đánh giá)</span>
+                        </div>
+                    </div>
+
+                    <!-- Tên sản phẩm khớp 100% hình ảnh -->
+                    <h1 class="fs-3 fw-bold text-dark mb-3">Camera Hành Trình 4K Ghi Hình Trước Sau</h1>
+
+                    <!-- Giá tiền khớp 100% hình ảnh -->
+                    <div class="bg-light rounded-3 p-3 mb-4 d-flex align-items-center gap-3">
+                        <span class="price-current">2.490.000đ</span>
+                        <span class="price-old">3.200.000đ</span>
+                        <span class="badge badge-sale py-2 px-3 rounded-pill">GIẢM 22%</span>
+                    </div>
+
+                    <!-- Mô tả tính năng cao cấp -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Tính năng vượt trội:</h6>
+                        <ul class="text-muted ps-3 small">
+                            <li><b>Độ phân giải Ultra HD 4K + 1080P:</b> Ghi hình siêu nét đồng thời cả phía trước và sau xe.</li>
+                            <li><b>Dual Sony HDR:</b> Cảm biến cao cấp từ Sony hỗ trợ chống ngược sáng và ghi hình ban đêm cực rõ.</li>
+                            <li><b>Bảo vệ pin thông minh:</b> Sử dụng siêu tụ điện bền bỉ, an toàn tuyệt đối chống cháy nổ.</li>
+                            <li><b>Kết nối Wifi & 4G LTE:</b> Xem lại video tốc độ cao, hỗ trợ quản lý và giám sát xe từ xa 24/24 qua ứng dụng di động.</li>
+                            <li><b>Hệ thống an toàn ADAS:</b> Cảnh báo lệch làn đường và cảnh báo va chạm sớm bằng giọng nói tiếng Việt.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Số lượng đặt mua -->
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="fw-bold text-secondary">Số lượng:</span>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-quantity rounded-start" onclick="decreaseQty()">-</button>
+                            <input type="text" id="quantity" class="form-control quantity-input" value="1" readonly>
+                            <button class="btn btn-quantity rounded-end" onclick="increaseQty()">+</button>
+                        </div>
+                        <span class="text-muted small">Có sẵn hàng lắp đặt ngay</span>
+                    </div>
+
+                    <!-- Tổ hợp nút mua hàng chuẩn màu Blue -->
+                    <div class="row g-2 mb-4">
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-add-to-cart w-100 d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-cart-plus fs-5"></i> Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <a href="cam.html" class="flex-grow-1 text-decoration-none">
+    <button type="button" class="btn text-white fw-bold w-100" style="background-color: #00b159; height: 50px;">
+        Mua ngay
+    </button>
+</a>
+                        </div>
+                    </div>
+
+                    <hr class="my-3">
+                    <!-- Dịch vụ đi kèm sản phẩm công nghệ ô tô -->
+                    <div class="row g-3">
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-shield-check service-icon"></i>
+                            <span>Bảo hành chính hãng <b>24 tháng</b></span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-tools service-icon"></i>
+                            <span>Hỗ trợ <b>miễn phí lắp đặt</b> tại cửa hàng</span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-sd-card service-icon"></i>
+                            <span>Tặng thẻ nhớ chuyên dụng <b>64GB</b></span>
+                        </div>
+                        <div class="col-6 col-md-6 service-item">
+                            <i class="bi bi-arrow-repeat service-icon"></i>
+                            <span>Lỗi 1 đổi 1 tận nơi trong <b>30 ngày</b></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PHẦN CHI TIẾT SẢN PHẨM KHÁC (TABS THÔNG TIN) -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm p-4">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bold text-dark" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">Thông số kỹ thuật</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold text-dark" id="guide-tab" data-bs-toggle="tab" data-bs-target="#guide" type="button" role="tab">Hướng dẫn cài đặt App</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-4" id="myTabContent">
+                        <!-- Tab thông số kỹ thuật -->
+                        <div class="tab-pane fade show active" id="specs" role="tabpanel">
+                            <table class="table table-striped table-bordered table-sm">
+                                <tbody>
+                                    <tr><td class="fw-bold px-3 py-2" style="width: 30%">Thương hiệu</td><td class="px-3 py-2">DiMart Auto Line</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Ống kính trước</td><td class="px-3 py-2">Ultra HD 4K (3840 x 2160P), Góc rộng 170 độ</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Ống kính sau</td><td class="px-3 py-2">Full HD 1080P, Góc rộng 140 độ, chống nước IP67</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Cảm biến hình ảnh</td><td class="px-3 py-2">Sony Starvis IMX415 (Tối ưu hóa ban đêm cực nét)</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">GPS & ADAS</td><td class="px-3 py-2">Tích hợp sẵn (Hiển thị tốc độ, tọa độ trên video và cảnh báo làn đường)</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Hỗ trợ thẻ nhớ</td><td class="px-3 py-2">MicroSD tối đa 256GB (khuyên dùng Class 10 trở lên)</td></tr>
+                                    <tr><td class="fw-bold px-3 py-2">Nguồn cấp</td><td class="px-3 py-2">Tẩu sạc xe hơi 12-24V hoặc đấu dây nguồn ACC giám sát đỗ xe</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Tab hướng dẫn cài đặt App -->
+                        <div class="tab-pane fade" id="guide" role="tabpanel">
+                            <p class="text-muted fw-semibold">Các bước kết nối xem video trên điện thoại di động:</p>
+                            <p class="text-muted">1. Tải ứng dụng quản lý camera tương ứng bằng cách quét mã QR đi kèm trong sách hướng dẫn (Hỗ trợ tốt cho cả Android và iOS).</p>
+                            <p class="text-muted">2. Khởi động xe hơi để bật nguồn Camera hành trình.</p>
+                            <p class="text-muted">3. Vào cài đặt Wifi của điện thoại, kết nối với tên sóng Wifi do camera phát ra (Mật khẩu mặc định thường là: <code class="bg-light p-1 rounded">12345678</code>).</p>
+                            <p class="text-muted">4. Mở ứng dụng đã tải lên và nhấn "Kết nối thiết bị" để bắt đầu xem trực tiếp, tải video hoặc cài đặt cấu hình camera cực kỳ tiện lợi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-section border-top pt-5 pb-4 mt-5">
+        <div class="container-fluid px-4 px-md-5">
+            <div class="row g-4 text-start">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <h5 class="footer-title">Tổng đài hỗ trợ DiMart</h5>
+                    <div class="mb-1">Mua hàng: <a href="#" class="phone-link">(033) 90 22 75</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script tương tác ảnh và số lượng -->
+    <script>
+        // Đổi ảnh chính
+        function changeImage(element) {
+            document.getElementById('mainImage').src = element.src;
+            let thumbs = document.querySelectorAll('.thumb-img');
+            thumbs.forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Tăng giảm số lượng sản phẩm
+        let qtyInput = document.getElementById('quantity');
+        function increaseQty() {
+            let currentVal = parseInt(qtyInput.value);
+            if(currentVal < 20) { 
+                qtyInput.value = currentVal + 1;
+            }
+        }
+        function decreaseQty() {
+            let currentVal = parseInt(qtyInput.value);
+            if(currentVal > 1) {
+                qtyInput.value = currentVal - 1;
+            }
+        }
+    </script>
+</body>
+</html>
